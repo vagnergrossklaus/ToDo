@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="todo-frontend:war">
+    <output-path>$PROJECT_DIR$/todo-frontend/target</output-path>
+    <root id="archive" name="todo-frontend.war">
+      <element id="artifact" artifact-name="todo-frontend:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,30 @@
+<form name="usuarioForm" ng-submit="salvarUsuario()">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-xs-12">
+        <label for="nome">Nome</label>
+        <input type="text" class="form-control" id="nome" placeholder="Nome do usuário" ng-model="usuario.nome" ng-required="true">
+      </div>
+      <div class="col-xs-12">
+        <label for="login">e-Mail</label>
+        <input type="email" class="form-control" id="email" placeholder="e-Mail do usuário" ng-model="usuario.email" ng-required="true">
+      </div>
+      <div class="col-xs-6">
+        <label for="senha">Senha</label>
+        <input type="password" class="form-control" id="senha" placeholder="Senha para autenticação" ng-model="usuario.senha" ng-required="true">
+      </div>
+      <div class="col-xs-6">
+        <label for="senha">Confirmação da senha</label>
+        <input type="password" class="form-control" id="senha" placeholder="Redigite sua senha" ng-model="usuario.senhaConfirmacao" ng-required="true">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-danger pull-right" type="submit">Cancelar</button>
+      <button class="btn btn-primary pull-right">Cadastrar</button>
+    </div>
+  </div>
+</form>
+
+{{validacaoMensagem}}

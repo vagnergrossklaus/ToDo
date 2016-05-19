@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="todo-oauth:war">
+    <output-path>$PROJECT_DIR$/todo-oauth/target</output-path>
+    <root id="archive" name="todo-oauth.war">
+      <element id="artifact" artifact-name="todo-oauth:war exploded" />
+    </root>
+  </artifact>
+</component>
