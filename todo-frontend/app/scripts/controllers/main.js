@@ -23,7 +23,7 @@ angular.module('todoFrontendApp')
 
     $scope.adicionarTarefa=function(){
       var t = tarefaDefault;
-      t.idUsuario = Session.get('sessionId');
+      t.idUsuario = Session.get().id;
       t.descricao = $scope.tarefa;
       tarefaFactory.inserirTarefa(t);
     }
@@ -77,8 +77,7 @@ angular.module('todoFrontendApp')
         status = -1;
       }
 
-
-      tarefaFactory.obterTarefas(Session.get('sessionId'), status)
+      tarefaFactory.obterTarefas(Session.get().id, status)
       .then(function (response) {
           //$scope.status = 'Retrieved orders!';
           $scope.tarefas = response.data;

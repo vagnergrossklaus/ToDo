@@ -15,8 +15,12 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'LocalStorageModule'
   ])
+  .config(['localStorageServiceProvider', function(localStorageServiceProvider){
+    localStorageServiceProvider.setPrefix('ls');
+  }])
   .config(function ($routeProvider, USER_ROLES) {
     $routeProvider
       .when('/', {
@@ -73,9 +77,8 @@ angular
       }
     });
   })
-  .controller('ApplicationController', function ($scope,
-                                               USER_ROLES,
-                                               AuthService, Session) {
+  .controller('ApplicationController', function ($scope, USER_ROLES, AuthService, Session, localStorageService) {
+
     $scope.currentUser = null;
     $scope.userRoles = USER_ROLES;
     $scope.isAuthorized = AuthService.isAuthorized;
@@ -84,10 +87,10 @@ angular
       $scope.currentUser = user;
     };
 
-    var init = function(Session){
-      Session.destroy();
+    var init = function(){
+      $scope.setCurrentUser(Session.get());
     }
 
-    init( Session );
+    init();
 
   });

@@ -32,22 +32,20 @@ angular.module('todoFrontendApp')
       return $http
         .post(urlBase + '/login', credentials)
         .then(function (res) {
-          Session.create(res.data.id, res.data.user,
-                         res.data.role);
+          Session.create(res.data);
           return res.data;
         });
     };
 
     authService.isAuthenticated = function () {
-      return !!Session.get('userId');
+      return !!Session.get().id;
     };
 
     authService.isAuthorized = function (authorizedRoles) {
       if (!angular.isArray(authorizedRoles)) {
         authorizedRoles = [authorizedRoles];
       }
-      return (authService.isAuthenticated() &&
-        authorizedRoles.indexOf(Session.get('userRole')) !== -1);
+      return (authService.isAuthenticated() && authorizedRoles.indexOf(Session.get().role) !== -1);
     };
 
     authService.logout = function(){
@@ -61,22 +59,15 @@ angular.module('todoFrontendApp')
 
     return authService;
   })
-  .service('Session', ['$cookieStore', function ($cookieStore) {
-    this.create = function (sessionId, userId, userRole) {
-      // this.id = sessionId;
-      // this.userId = userId;
-      // this.userRole = userRole;
-      $cookieStore.put("sessionId", sessionId);
-      $cookieStore.put("userId", userId);
-      $cookieStore.put("userRole", userRole);
+  .service('Session', ['$cookieStore', 'localStorageService', function ($cookieStore, localStorageService) {
+    this.create = function (user) {
+      localStorageService.set("user", user);
     };
-    this.get = function(data){
-      return $cookieStore.get(data);
+    this.get = function(){
+      return localStorageService.get("user");
     };
     this.destroy = function () {
-      $cookieStore.remove("sessionId");
-      $cookieStore.remove("userId");
-      $cookieStore.remove("userRole");
+      localStorageService.remove("user");
     };
 
   }])
